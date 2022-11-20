@@ -16,9 +16,12 @@ class UpdateItem(BaseModel):
 
 inventory ={}
 
+#今後會使用該代碼來進行改寫
+
 @app.get("/git-item/{item_id}")
 def get_item(item_id: int=Path(None,description="We can't find this id",gt=0)):
     return inventory[item_id]
+
 
 @app.get("/git-by-name")
 def get_item(name: str = Query(None, title="name", description="Name of item.", max_length=10, min_length=2)):
@@ -50,3 +53,8 @@ def update_item(item_id:int ,item:Item):
         inventory[item_id].brand=item.brand
 
     return inventory[item_id]
+
+@app.delete("/detele-item")
+def delete_item(item_id: int = Query(...,description="DELETE!",gt=0)):
+    if item_id not in inventory:
+        return {"error":"I cannot find this ID"}
