@@ -4,6 +4,9 @@ from pydantic import BaseModel
 
 app=FastAPI()
 
+class Email(BaseModel):
+    email: str
+
 class Item(BaseModel):
     name: str
     price: float
