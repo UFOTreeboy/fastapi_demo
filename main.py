@@ -1,11 +1,14 @@
-from fastapi import FastAPI,Path,Query,HTTPException,status
+from fastapi import FastAPI,Path,Query,HTTPException,status, Request, Header
 from typing import Optional
 from pydantic import BaseModel
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
 
 app=FastAPI()
 
-class Email(BaseModel):
-    email: str
+
+templates = Jinja2Templates(directory="templates")
+
 
 class Item(BaseModel):
     name: str
